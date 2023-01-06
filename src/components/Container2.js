@@ -9,10 +9,6 @@ function Container2() {
     // console.log(state);
     const [flag, setFlag] = useState(true);
 
-    // const [gridSize, setGridSize] = useState(Array(9).fill(null));
-    // const [count, setCount] = useState(1);
-    // console.log(state);
-
     const winnerGrid = [
         [0, 1, 2],
         [3, 4, 5],
@@ -56,23 +52,51 @@ function Container2() {
       }
       var count = 0;
 
+      const checkCount = () => {
+        // console.log('count',count);
+        if((count-1) % 3 === 0){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+
   return(
     <div className='container'>
         {isWinner?
         <>
-           <h3>Hurray!! {isWinner} wins </h3>
+           <h1>Hurray!! {isWinner} wins </h1>
            
-           <button onClick={handleReset}>Play Again</button>
+           <button className='btn' onClick={handleReset}>Play Again</button>
         </>
         :
         <>
-            <h4>{flag?'X':'O'}'s turn</h4>
-            
             <div>
+              <h2>{flag?'X':'O'}'s turn</h2>
+            </div>
+            
+            <div className='try'>
               {state.map((item, index) => {
                 let value = count;
                 count++;
-                return <Box onClick={() => handleClick(value)} value={state[value]} key={index} />
+                
+                return (
+                  <>
+                  {checkCount()?
+                  <>
+                    <div className="break"></div>
+                    <div>
+                      <Box onClick={() => handleClick(value)} value={state[value]}  />
+                    </div>
+                  </>
+                  :
+                  <div key={index}>
+                    <Box onClick={() => handleClick(value)} value={state[value]}  />
+                  </div>
+                  }
+                  </>
+                )
               })}
               
             </div>
