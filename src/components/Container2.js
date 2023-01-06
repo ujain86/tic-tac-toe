@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Box from './Box';
 
-function Container() {
+function Container2() {
 
     
     // const [state, setState] = useState(Array((gridSize.length * gridSize.length)).fill(null));
@@ -54,32 +54,27 @@ function Container() {
       const handleReset = () => {
         setState(Array(9).fill(null));
       }
+      var count = 0;
 
   return(
     <div className='container'>
         {isWinner?
         <>
-           <h1>Hurray!! {isWinner} wins </h1>
+           <h3>Hurray!! {isWinner} wins </h3>
            
-           <button className='btn' onClick={handleReset}>Play Again</button>
+           <button onClick={handleReset}>Play Again</button>
         </>
         :
         <>
-            <h2 style={{textAlign: 'center'}}>{flag?'X':'O'}'s turn</h2>
-            <div className="row">
-                <Box onClick={() => handleClick(0)} value={state[0]} />
-                <Box onClick={() => handleClick(1)} value={state[1]} />
-                <Box onClick={() => handleClick(2)} value={state[2]} />
-            </div>
-            <div className="row">
-                <Box onClick={() => handleClick(3)} value={state[3]} />
-                <Box onClick={() => handleClick(4)} value={state[4]} />
-                <Box onClick={() => handleClick(5)} value={state[5]} />
-            </div>
-            <div className="row">
-                <Box onClick={() => handleClick(6)} value={state[6]} />
-                <Box onClick={() => handleClick(7)} value={state[7]} />
-                <Box onClick={() => handleClick(8)} value={state[8]} />
+            <h4>{flag?'X':'O'}'s turn</h4>
+            
+            <div>
+              {state.map((item, index) => {
+                let value = count;
+                count++;
+                return <Box onClick={() => handleClick(value)} value={state[value]} key={index} />
+              })}
+              
             </div>
         </>}
 
@@ -88,4 +83,4 @@ function Container() {
   
 }
 
-export default Container;
+export default Container2;

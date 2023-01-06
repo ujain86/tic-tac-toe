@@ -1,4 +1,5 @@
 import Container from './Container';
+import Container2 from './Container2';
 
 function App() {
   return (
